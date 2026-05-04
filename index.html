@@ -676,14 +676,23 @@ async function fetchReleases() {
 
   const allCards = [];
   const errors   = [];
+  const notFound = [];
 
   results.forEach((r, i) => {
     if (r.status === 'fulfilled') {
       allCards.push(...r.value);
+    } else if (r.reason.notFound) {
+      notFound.push(cfg.repos[i]);
     } else {
-      errors.push(`${cfg.repos[i]}: ${r.reason}`);
+      errors.push(`${cfg.repos[i]}: ${r.reason.message}`);
     }
   });
+
+  if (notFound.length) {
+    const updatedRepos = cfg.repos.filter(s => !notFound.includes(s));
+    localStorage.setItem(KEY_REPOS, JSON.stringify(updatedRepos));
+    errors.unshift(`Removed (not found): ${notFound.join(', ')}`);
+  }
 
   if (errors.length) {
     errorBanner.textContent = errors.join('\n');
@@ -708,7 +717,7 @@ async function fetchRepoReleases(slug, pat) {
 
   if (res.status === 401) throw new Error('Token invalid or expired');
   if (res.status === 403) throw new Error('Token lacks repo read permission');
-  if (res.status === 404) throw new Error('Repo not found — check owner/name');
+  if (res.status === 404) { const e = new Error('not found'); e.notFound = true; throw e; }
   if (!res.ok)            throw new Error(`HTTP ${res.status}`);
 
   const data = await res.json();
