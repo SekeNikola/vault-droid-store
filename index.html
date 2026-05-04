@@ -7,7 +7,6 @@
   <link rel="manifest" href="manifest.json">
   <title>VaultDroid</title>
   <style>
-    /* ── Reset & Base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -36,12 +35,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Layout ── */
-    #app {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+    #app { display: flex; flex-direction: column; min-height: 100vh; }
 
     /* ── Header ── */
     header {
@@ -60,14 +54,9 @@
       font-size: 18px;
       font-weight: 700;
       letter-spacing: -0.3px;
-      color: var(--text);
     }
+    .header-title span { color: var(--accent); }
 
-    .header-title span {
-      color: var(--accent);
-    }
-
-    /* Settings button */
     #settings-btn {
       background: none;
       border: none;
@@ -81,14 +70,9 @@
       position: relative;
       transition: color 0.15s, background 0.15s;
     }
-
     #settings-btn:hover { color: var(--text); background: var(--border); }
-    #settings-btn:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 2px;
-    }
+    #settings-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
-    /* Settings dropdown */
     #settings-dropdown {
       display: none;
       position: absolute;
@@ -102,7 +86,6 @@
       overflow: hidden;
       z-index: 100;
     }
-
     #settings-dropdown.open { display: block; }
 
     .dropdown-item {
@@ -118,15 +101,11 @@
       cursor: pointer;
       transition: background 0.12s;
     }
-
     .dropdown-item:hover { background: var(--border); }
-    .dropdown-item:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: -3px;
-    }
+    .dropdown-item:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
     .dropdown-item.danger { color: var(--error-text); }
 
-    /* ── Main content ── */
+    /* ── Main ── */
     main {
       flex: 1;
       padding: 24px 20px;
@@ -135,20 +114,10 @@
       width: 100%;
     }
 
-    /* ── Card grid ── */
-    #cards-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    @media (min-width: 640px) {
-      #cards-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (min-width: 1024px) {
-      #cards-grid { grid-template-columns: repeat(3, 1fr); }
-    }
+    /* ── Cards grid ── */
+    #cards-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px)  { #cards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { #cards-grid { grid-template-columns: repeat(3, 1fr); } }
 
     /* ── Release card ── */
     .release-card {
@@ -188,16 +157,15 @@
       flex-shrink: 0;
     }
 
-    .card-date {
-      font-size: 13px;
-      color: var(--text-muted);
+    .card-repo {
+      font-size: 12px;
+      color: #666;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     }
 
-    .card-footer {
-      margin-top: 4px;
-    }
+    .card-date { font-size: 13px; color: var(--text-muted); }
+    .card-footer { margin-top: 4px; }
 
-    /* ── Download button ── */
     .btn-download {
       display: block;
       width: 100%;
@@ -214,19 +182,11 @@
       transition: background 0.15s, opacity 0.15s;
       text-align: center;
     }
-
     .btn-download:hover:not(:disabled) { background: var(--accent-hov); }
     .btn-download:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-download:focus-visible {
-      outline: 3px solid var(--accent-hov);
-      outline-offset: 3px;
-    }
-    .btn-download.btn--error {
-      background: #7a2020;
-      color: var(--error-text);
-    }
+    .btn-download:focus-visible { outline: 3px solid var(--accent-hov); outline-offset: 3px; }
+    .btn-download.btn--error { background: #7a2020; color: var(--error-text); }
 
-    /* No APK label */
     .no-apk-label {
       display: block;
       width: 100%;
@@ -240,10 +200,9 @@
       border-radius: 22px;
       text-align: center;
       line-height: 24px;
-      cursor: default;
     }
 
-    /* ── Loading spinner ── */
+    /* ── Loading ── */
     #loading-state {
       display: none;
       flex-direction: column;
@@ -253,7 +212,6 @@
       color: var(--text-muted);
       font-size: 14px;
     }
-
     #loading-state.visible { display: flex; }
 
     .spinner {
@@ -264,7 +222,6 @@
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ── Error banner ── */
@@ -277,8 +234,8 @@
       color: var(--error-text);
       font-size: 14px;
       margin-bottom: 20px;
+      white-space: pre-wrap;
     }
-
     #error-banner.visible { display: block; }
 
     /* ── Empty state ── */
@@ -289,10 +246,9 @@
       color: var(--text-muted);
       font-size: 14px;
     }
-
     #empty-state.visible { display: block; }
 
-    /* ── Modal overlay ── */
+    /* ── Modal ── */
     #modal-overlay {
       display: none;
       position: fixed;
@@ -303,7 +259,6 @@
       justify-content: center;
       padding: 20px;
     }
-
     #modal-overlay.visible { display: flex; }
 
     #setup-modal {
@@ -312,7 +267,9 @@
       border-radius: var(--radius-md);
       padding: 32px 28px;
       width: 100%;
-      max-width: 440px;
+      max-width: 460px;
+      max-height: 90vh;
+      overflow-y: auto;
       box-shadow: 0 16px 48px rgba(0,0,0,0.6);
     }
 
@@ -320,23 +277,35 @@
       font-size: 20px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .modal-subtitle {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 24px;
+    }
+
+    .form-section {
+      margin-bottom: 24px;
+    }
+
+    .form-section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: block;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-bottom: 16px;
+      margin-bottom: 0;
     }
-
-    .form-group:last-of-type { margin-bottom: 24px; }
 
     label {
       font-size: 13px;
@@ -356,15 +325,88 @@
       transition: border-color 0.15s;
       width: 100%;
     }
-
     input[type="text"]:focus,
     input[type="password"]:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.2);
+      box-shadow: 0 0 0 3px rgba(79,142,247,0.2);
+    }
+    input::placeholder { color: #555; }
+
+    /* Repo add row */
+    .repo-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .repo-input-row input { flex: 1; }
+
+    .btn-add-repo {
+      background: var(--border);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 16px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.12s;
+    }
+    .btn-add-repo:hover { background: #3a3a3a; }
+    .btn-add-repo:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    /* Repo chips */
+    .repo-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 24px;
     }
 
-    input::placeholder { color: #555; }
+    .repo-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg);
+      border: 1px solid var(--border-mid);
+      border-radius: 20px;
+      padding: 4px 10px 4px 12px;
+      font-size: 13px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      color: var(--text);
+    }
+
+    .chip-remove {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 0 2px;
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+      transition: color 0.12s;
+    }
+    .chip-remove:hover { color: var(--error-text); }
+    .chip-remove:focus-visible { outline: 2px solid var(--accent); }
+
+    .repo-hint {
+      font-size: 12px;
+      color: #555;
+      margin-top: 8px;
+    }
+
+    .modal-error {
+      font-size: 13px;
+      color: var(--error-text);
+      margin-bottom: 12px;
+      display: none;
+    }
+    .modal-error.visible { display: block; }
 
     .btn-primary {
       display: block;
@@ -380,24 +422,19 @@
       border-radius: 22px;
       cursor: pointer;
       transition: background 0.15s;
+      margin-top: 8px;
     }
-
     .btn-primary:hover { background: var(--accent-hov); }
-    .btn-primary:focus-visible {
-      outline: 3px solid var(--accent-hov);
-      outline-offset: 3px;
-    }
+    .btn-primary:focus-visible { outline: 3px solid var(--accent-hov); outline-offset: 3px; }
   </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- Header -->
   <header>
     <div class="header-title">Vault<span>Droid</span></div>
     <div style="position:relative;">
       <button id="settings-btn" aria-label="Settings" aria-haspopup="true" aria-expanded="false">
-        <!-- Gear icon (inline SVG) -->
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="3"/>
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -410,21 +447,13 @@
     </div>
   </header>
 
-  <!-- Main -->
   <main>
-    <!-- Error banner -->
     <div id="error-banner" role="alert" aria-live="polite"></div>
-
-    <!-- Loading state -->
     <div id="loading-state" aria-label="Loading releases">
       <div class="spinner" aria-hidden="true"></div>
       <span>Fetching releases…</span>
     </div>
-
-    <!-- Empty state -->
     <div id="empty-state" aria-live="polite">No releases found.</div>
-
-    <!-- Cards grid -->
     <div id="cards-grid" aria-label="App releases"></div>
   </main>
 
@@ -434,366 +463,401 @@
 <div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div id="setup-modal">
     <div class="modal-title" id="modal-title">Connect to GitHub</div>
-    <div class="modal-subtitle">Your credentials are stored locally and never sent anywhere except GitHub's API.</div>
+    <div class="modal-subtitle">Stored locally. Never sent anywhere except GitHub's API.</div>
 
     <form id="setup-form" novalidate>
-      <div class="form-group">
-        <label for="input-owner">GitHub Owner</label>
-        <input
-          type="text"
-          id="input-owner"
-          name="owner"
-          placeholder="e.g. nikola"
-          autocomplete="username"
-          autocorrect="off"
-          autocapitalize="none"
-          spellcheck="false"
-          tabindex="1"
-          required
-        >
+
+      <!-- PAT -->
+      <div class="form-section">
+        <span class="form-section-label">Personal Access Token</span>
+        <div class="form-group">
+          <input
+            type="password"
+            id="input-pat"
+            placeholder="ghp_…"
+            autocomplete="current-password"
+            spellcheck="false"
+          >
+        </div>
+        <p class="repo-hint">Fine-grained token → Repository permissions → Contents: Read-only (+ Metadata: Read-only, auto-required)</p>
       </div>
 
-      <div class="form-group">
-        <label for="input-repo">Repository Name</label>
-        <input
-          type="text"
-          id="input-repo"
-          name="repo"
-          placeholder="e.g. my-apps"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="none"
-          spellcheck="false"
-          tabindex="2"
-          required
-        >
+      <!-- Repos -->
+      <div class="form-section">
+        <span class="form-section-label">Repositories</span>
+        <div class="repo-input-row">
+          <input
+            type="text"
+            id="input-repo"
+            placeholder="owner/repo"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="none"
+            spellcheck="false"
+          >
+          <button type="button" class="btn-add-repo" id="add-repo-btn">Add</button>
+        </div>
+        <div class="repo-chips" id="repo-chips" aria-label="Added repositories"></div>
+        <p class="repo-hint" id="repo-count-hint"></p>
       </div>
 
-      <div class="form-group">
-        <label for="input-pat">Personal Access Token</label>
-        <input
-          type="password"
-          id="input-pat"
-          name="pat"
-          placeholder="ghp_…"
-          autocomplete="current-password"
-          spellcheck="false"
-          tabindex="3"
-          required
-        >
-      </div>
-
-      <button type="submit" class="btn-primary" tabindex="4">Save &amp; Connect</button>
+      <div class="modal-error" id="modal-error"></div>
+      <button type="submit" class="btn-primary">Save &amp; Connect</button>
     </form>
   </div>
 </div>
 
 <script>
-  'use strict';
+'use strict';
 
-  // ── State ──────────────────────────────────────────────────────────────────
-  let _releases = [];
+// ── Storage keys ──────────────────────────────────────────────────────────────
+const KEY_PAT   = 'vd_pat';
+const KEY_REPOS = 'vd_repos'; // JSON array of "owner/repo" strings
 
-  // ── DOM refs ───────────────────────────────────────────────────────────────
-  const modalOverlay   = document.getElementById('modal-overlay');
-  const setupForm      = document.getElementById('setup-form');
-  const inputOwner     = document.getElementById('input-owner');
-  const inputRepo      = document.getElementById('input-repo');
-  const inputPat       = document.getElementById('input-pat');
-  const cardsGrid      = document.getElementById('cards-grid');
-  const loadingState   = document.getElementById('loading-state');
-  const errorBanner    = document.getElementById('error-banner');
-  const emptyState     = document.getElementById('empty-state');
-  const settingsBtn    = document.getElementById('settings-btn');
-  const settingsDrop   = document.getElementById('settings-dropdown');
-  const editSettingsBtn = document.getElementById('edit-settings-btn');
-  const signoutBtn     = document.getElementById('signout-btn');
+// ── DOM refs ──────────────────────────────────────────────────────────────────
+const modalOverlay    = document.getElementById('modal-overlay');
+const setupForm       = document.getElementById('setup-form');
+const inputPat        = document.getElementById('input-pat');
+const inputRepo       = document.getElementById('input-repo');
+const addRepoBtn      = document.getElementById('add-repo-btn');
+const repoChipsEl     = document.getElementById('repo-chips');
+const repoCountHint   = document.getElementById('repo-count-hint');
+const modalError      = document.getElementById('modal-error');
+const cardsGrid       = document.getElementById('cards-grid');
+const loadingState    = document.getElementById('loading-state');
+const errorBanner     = document.getElementById('error-banner');
+const emptyState      = document.getElementById('empty-state');
+const settingsBtn     = document.getElementById('settings-btn');
+const settingsDrop    = document.getElementById('settings-dropdown');
+const editSettingsBtn = document.getElementById('edit-settings-btn');
+const signoutBtn      = document.getElementById('signout-btn');
 
-  // ── Config helpers ─────────────────────────────────────────────────────────
-  function loadConfig() {
-    const pat   = localStorage.getItem('vd_pat');
-    const owner = localStorage.getItem('vd_owner');
-    const repo  = localStorage.getItem('vd_repo');
-    if (pat && owner && repo) return { pat, owner, repo };
-    return null;
-  }
+// ── In-modal repo list state ──────────────────────────────────────────────────
+let _modalRepos = [];
 
-  function saveConfig(owner, repo, pat) {
-    localStorage.setItem('vd_owner', owner.trim());
-    localStorage.setItem('vd_repo',  repo.trim());
-    localStorage.setItem('vd_pat',   pat.trim());
-  }
+// ── Config ────────────────────────────────────────────────────────────────────
+function loadConfig() {
+  const pat   = localStorage.getItem(KEY_PAT);
+  const repos = parseRepos(localStorage.getItem(KEY_REPOS));
+  if (pat && repos.length) return { pat, repos };
+  return null;
+}
 
-  // ── Modal ──────────────────────────────────────────────────────────────────
-  function showSetupModal(prefill = false) {
-    if (prefill) {
-      const cfg = loadConfig();
-      if (cfg) {
-        inputOwner.value = cfg.owner;
-        inputRepo.value  = cfg.repo;
-        inputPat.value   = ''; // never pre-fill PAT for security
-      }
-    } else {
-      inputOwner.value = '';
-      inputRepo.value  = '';
-      inputPat.value   = '';
-    }
-    modalOverlay.classList.add('visible');
-    requestAnimationFrame(() => inputOwner.focus());
-  }
+function saveConfig(pat, repos) {
+  localStorage.setItem(KEY_PAT,   pat.trim());
+  localStorage.setItem(KEY_REPOS, JSON.stringify(repos));
+}
 
-  function hideSetupModal() {
-    modalOverlay.classList.remove('visible');
-  }
+function parseRepos(raw) {
+  try {
+    const arr = JSON.parse(raw || '[]');
+    return Array.isArray(arr) ? arr.filter(s => /^[^/]+\/[^/]+$/.test(s)) : [];
+  } catch { return []; }
+}
 
-  // Submit — Enter in last field naturally submits the form
-  setupForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const owner = inputOwner.value.trim();
-    const repo  = inputRepo.value.trim();
-    const pat   = inputPat.value.trim();
-    if (!owner || !repo || !pat) return;
-    saveConfig(owner, repo, pat);
-    hideSetupModal();
-    fetchReleases();
-  });
-
-  // Close modal on overlay click
-  modalOverlay.addEventListener('click', e => {
-    if (e.target === modalOverlay && loadConfig()) hideSetupModal();
-  });
-
-  // ── UI state helpers ───────────────────────────────────────────────────────
-  function showLoading() {
-    loadingState.classList.add('visible');
-    errorBanner.classList.remove('visible');
-    emptyState.classList.remove('visible');
-    cardsGrid.innerHTML = '';
-  }
-
-  function hideLoading() {
-    loadingState.classList.remove('visible');
-  }
-
-  function showError(message) {
-    hideLoading();
-    errorBanner.textContent = message;
-    errorBanner.classList.add('visible');
-    cardsGrid.innerHTML = '';
-    emptyState.classList.remove('visible');
-  }
-
-  function clearError() {
-    errorBanner.classList.remove('visible');
-  }
-
-  // ── fetchReleases ──────────────────────────────────────────────────────────
-  async function fetchReleases() {
-    const cfg = loadConfig();
-    if (!cfg) return;
-
-    const url = `https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/releases?per_page=100`;
-
-    showLoading();
-    clearError();
-
-    try {
-      const res = await fetch(url, {
-        headers: {
-          'Authorization': `Bearer ${cfg.pat}`,
-          'Accept': 'application/vnd.github+json',
-          'X-GitHub-Api-Version': '2022-11-28',
-        }
-      });
-
-      hideLoading();
-
-      if (res.ok) {
-        const data = await res.json();
-        _releases = data;
-        renderCards(normalizeReleases(data));
-      } else if (res.status === 401) {
-        showError('Token invalid or expired. Please update your PAT.');
-      } else if (res.status === 403) {
-        showError('Token lacks required permissions (needs repo scope).');
-      } else if (res.status === 404) {
-        showError('Repository not found. Check owner and repo name.');
-      } else {
-        showError(`Unexpected error (HTTP ${res.status}). Try again.`);
-      }
-    } catch {
-      hideLoading();
-      showError('Network error. Check your connection.');
-    }
-  }
-
-  // ── normalizeReleases ──────────────────────────────────────────────────────
-  function normalizeReleases(releases) {
-    return releases
-      .map(r => ({
-        id:           r.id,
-        appName:      r.name || r.tag_name,
-        version:      r.tag_name,
-        publishedAt:  new Date(r.published_at),
-        apkAsset:     r.assets.find(a => a.name.endsWith('.apk')) ?? null,
-        releaseNotes: r.body ?? '',
-      }))
-      .sort((a, b) => b.publishedAt - a.publishedAt);
-  }
-
-  // ── renderCards ────────────────────────────────────────────────────────────
-  function renderCards(cards) {
-    cardsGrid.innerHTML = '';
-
-    if (!cards.length) {
-      emptyState.classList.add('visible');
-      return;
-    }
-
-    emptyState.classList.remove('visible');
-
-    cards.forEach(card => {
-      const el = document.createElement('article');
-      el.className = 'release-card';
-      el.setAttribute('aria-label', `${card.appName} ${card.version}`);
-
-      const dateStr = card.publishedAt.toLocaleDateString('en-GB', {
-        day: '2-digit', month: 'short', year: 'numeric'
-      });
-
-      const footerHtml = card.apkAsset
-        ? `<button
-             class="btn-download"
-             data-asset-id="${card.apkAsset.id}"
-             aria-label="Download ${escHtml(card.appName)} APK"
-           >Download</button>`
-        : `<span class="no-apk-label" aria-label="No APK available">No APK</span>`;
-
-      el.innerHTML = `
-        <div class="card-header">
-          <div class="card-app-name">${escHtml(card.appName)}</div>
-          <span class="card-version" aria-label="Version ${escHtml(card.version)}">${escHtml(card.version)}</span>
-        </div>
-        <div class="card-date">${escHtml(dateStr)}</div>
-        <div class="card-footer">${footerHtml}</div>
-      `;
-
-      // Wire up download button if present
-      if (card.apkAsset) {
-        const btn = el.querySelector('.btn-download');
-        btn.addEventListener('click', () => downloadApk(card.apkAsset, btn));
-      }
-
-      cardsGrid.appendChild(el);
+// ── Modal repo chip UI ────────────────────────────────────────────────────────
+function renderChips() {
+  repoChipsEl.innerHTML = '';
+  _modalRepos.forEach((slug, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'repo-chip';
+    chip.innerHTML = `${escHtml(slug)}<button class="chip-remove" aria-label="Remove ${escHtml(slug)}" data-idx="${i}">&times;</button>`;
+    chip.querySelector('.chip-remove').addEventListener('click', () => {
+      _modalRepos.splice(i, 1);
+      renderChips();
     });
-  }
+    repoChipsEl.appendChild(chip);
+  });
+  repoCountHint.textContent = _modalRepos.length
+    ? `${_modalRepos.length} repo${_modalRepos.length > 1 ? 's' : ''} added`
+    : 'Add at least one repository.';
+}
 
-  // ── downloadApk ───────────────────────────────────────────────────────────
-  async function downloadApk(asset, btn) {
+function addRepo() {
+  const val = inputRepo.value.trim();
+  if (!val) return;
+  if (!/^[^/]+\/[^/]+$/.test(val)) {
+    showModalError('Format must be owner/repo — e.g. SekeNikola/voizapp');
+    return;
+  }
+  if (_modalRepos.includes(val)) {
+    showModalError('Already added.');
+    return;
+  }
+  _modalRepos.push(val);
+  inputRepo.value = '';
+  clearModalError();
+  renderChips();
+}
+
+addRepoBtn.addEventListener('click', addRepo);
+inputRepo.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); addRepo(); }
+});
+
+// ── Modal show/hide ───────────────────────────────────────────────────────────
+function showSetupModal(prefill = false) {
+  clearModalError();
+  if (prefill) {
     const cfg = loadConfig();
-    if (!cfg) return;
-
-    btn.textContent = 'Downloading…';
-    btn.disabled = true;
-    btn.classList.remove('btn--error');
-
-    try {
-      const apiUrl = `https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/releases/assets/${asset.id}`;
-      const res = await fetch(apiUrl, {
-        headers: {
-          'Authorization': `Bearer ${cfg.pat}`,
-          'Accept': 'application/octet-stream',
-          'X-GitHub-Api-Version': '2022-11-28',
-        }
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-      const blob = await res.blob();
-      const objectUrl = URL.createObjectURL(blob);
-
-      const anchor = document.createElement('a');
-      anchor.href = objectUrl;
-      anchor.download = asset.name;
-      anchor.style.display = 'none';
-      document.body.appendChild(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-
-      setTimeout(() => URL.revokeObjectURL(objectUrl), 500);
-
-      btn.textContent = 'Download';
-      btn.disabled = false;
-    } catch {
-      btn.textContent = 'Failed — Retry';
-      btn.disabled = false;
-      btn.classList.add('btn--error');
-    }
+    inputPat.value = '';
+    _modalRepos = cfg ? [...cfg.repos] : [];
+  } else {
+    inputPat.value = '';
+    _modalRepos = [];
   }
+  renderChips();
+  modalOverlay.classList.add('visible');
+  requestAnimationFrame(() => inputPat.focus());
+}
 
-  // ── Settings dropdown ──────────────────────────────────────────────────────
-  settingsBtn.addEventListener('click', e => {
-    e.stopPropagation();
-    const open = settingsDrop.classList.toggle('open');
-    settingsBtn.setAttribute('aria-expanded', String(open));
+function hideSetupModal() {
+  modalOverlay.classList.remove('visible');
+}
+
+function showModalError(msg) {
+  modalError.textContent = msg;
+  modalError.classList.add('visible');
+}
+
+function clearModalError() {
+  modalError.classList.remove('visible');
+}
+
+// Submit
+setupForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const pat = inputPat.value.trim();
+  if (!pat) { showModalError('Enter your Personal Access Token.'); return; }
+  if (!_modalRepos.length) { showModalError('Add at least one repository.'); return; }
+  saveConfig(pat, _modalRepos);
+  hideSetupModal();
+  fetchReleases();
+});
+
+// Close on overlay click (only if already configured)
+modalOverlay.addEventListener('click', e => {
+  if (e.target === modalOverlay && loadConfig()) hideSetupModal();
+});
+
+// ── UI state ──────────────────────────────────────────────────────────────────
+function showLoading() {
+  loadingState.classList.add('visible');
+  errorBanner.classList.remove('visible');
+  emptyState.classList.remove('visible');
+  cardsGrid.innerHTML = '';
+}
+
+function hideLoading() {
+  loadingState.classList.remove('visible');
+}
+
+function showError(message) {
+  hideLoading();
+  errorBanner.textContent = message;
+  errorBanner.classList.add('visible');
+  cardsGrid.innerHTML = '';
+  emptyState.classList.remove('visible');
+}
+
+// ── fetchReleases — all repos in parallel ─────────────────────────────────────
+async function fetchReleases() {
+  const cfg = loadConfig();
+  if (!cfg) return;
+
+  showLoading();
+  errorBanner.classList.remove('visible');
+
+  const results = await Promise.allSettled(
+    cfg.repos.map(slug => fetchRepoReleases(slug, cfg.pat))
+  );
+
+  hideLoading();
+
+  const allCards = [];
+  const errors   = [];
+
+  results.forEach((r, i) => {
+    if (r.status === 'fulfilled') {
+      allCards.push(...r.value);
+    } else {
+      errors.push(`${cfg.repos[i]}: ${r.reason}`);
+    }
   });
 
-  document.addEventListener('click', () => {
+  if (errors.length) {
+    errorBanner.textContent = errors.join('\n');
+    errorBanner.classList.add('visible');
+  }
+
+  allCards.sort((a, b) => b.publishedAt - a.publishedAt);
+  renderCards(allCards);
+}
+
+async function fetchRepoReleases(slug, pat) {
+  const [owner, repo] = slug.split('/');
+  const url = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/releases?per_page=100`;
+
+  const res = await fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${pat}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    }
+  });
+
+  if (res.status === 401) throw new Error('Token invalid or expired');
+  if (res.status === 403) throw new Error('Token lacks repo read permission');
+  if (res.status === 404) throw new Error('Repo not found — check owner/name');
+  if (!res.ok)            throw new Error(`HTTP ${res.status}`);
+
+  const data = await res.json();
+  return data.map(r => ({
+    id:          r.id,
+    appName:     r.name || r.tag_name,
+    version:     r.tag_name,
+    publishedAt: new Date(r.published_at),
+    apkAsset:    r.assets.find(a => a.name.endsWith('.apk')) ?? null,
+    repoSlug:    slug,
+  }));
+}
+
+// ── renderCards ───────────────────────────────────────────────────────────────
+function renderCards(cards) {
+  cardsGrid.innerHTML = '';
+
+  if (!cards.length) {
+    emptyState.classList.add('visible');
+    return;
+  }
+  emptyState.classList.remove('visible');
+
+  cards.forEach(card => {
+    const el = document.createElement('article');
+    el.className = 'release-card';
+    el.setAttribute('aria-label', `${card.appName} ${card.version}`);
+
+    const dateStr = card.publishedAt.toLocaleDateString('en-GB', {
+      day: '2-digit', month: 'short', year: 'numeric'
+    });
+
+    const footerHtml = card.apkAsset
+      ? `<button class="btn-download" aria-label="Download ${escHtml(card.appName)} APK">Download</button>`
+      : `<span class="no-apk-label" aria-label="No APK available">No APK</span>`;
+
+    el.innerHTML = `
+      <div class="card-header">
+        <div class="card-app-name">${escHtml(card.appName)}</div>
+        <span class="card-version" aria-label="Version ${escHtml(card.version)}">${escHtml(card.version)}</span>
+      </div>
+      <div class="card-repo">${escHtml(card.repoSlug)}</div>
+      <div class="card-date">${escHtml(dateStr)}</div>
+      <div class="card-footer">${footerHtml}</div>
+    `;
+
+    if (card.apkAsset) {
+      el.querySelector('.btn-download').addEventListener('click', function() {
+        downloadApk(card.apkAsset, card.repoSlug, this);
+      });
+    }
+
+    cardsGrid.appendChild(el);
+  });
+}
+
+// ── downloadApk ───────────────────────────────────────────────────────────────
+async function downloadApk(asset, repoSlug, btn) {
+  const cfg = loadConfig();
+  if (!cfg) return;
+
+  btn.textContent = 'Downloading…';
+  btn.disabled = true;
+  btn.classList.remove('btn--error');
+
+  try {
+    const [owner, repo] = repoSlug.split('/');
+    const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/releases/assets/${asset.id}`;
+
+    const res = await fetch(apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${cfg.pat}`,
+        'Accept': 'application/octet-stream',
+        'X-GitHub-Api-Version': '2022-11-28',
+      }
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const blob      = URL.createObjectURL(await res.blob());
+    const anchor    = Object.assign(document.createElement('a'), { href: blob, download: asset.name, style: 'display:none' });
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    setTimeout(() => URL.revokeObjectURL(blob), 500);
+
+    btn.textContent = 'Download';
+    btn.disabled = false;
+  } catch {
+    btn.textContent = 'Failed — Retry';
+    btn.disabled = false;
+    btn.classList.add('btn--error');
+  }
+}
+
+// ── Settings dropdown ─────────────────────────────────────────────────────────
+settingsBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const open = settingsDrop.classList.toggle('open');
+  settingsBtn.setAttribute('aria-expanded', String(open));
+});
+
+document.addEventListener('click', () => {
+  if (settingsDrop.classList.contains('open')) {
+    settingsDrop.classList.remove('open');
+    settingsBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
     if (settingsDrop.classList.contains('open')) {
       settingsDrop.classList.remove('open');
       settingsBtn.setAttribute('aria-expanded', 'false');
+      settingsBtn.focus();
+    } else if (modalOverlay.classList.contains('visible') && loadConfig()) {
+      hideSetupModal();
     }
-  });
-
-  // Keyboard: close on Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      if (settingsDrop.classList.contains('open')) {
-        settingsDrop.classList.remove('open');
-        settingsBtn.setAttribute('aria-expanded', 'false');
-        settingsBtn.focus();
-      } else if (modalOverlay.classList.contains('visible') && loadConfig()) {
-        hideSetupModal();
-      }
-    }
-  });
-
-  editSettingsBtn.addEventListener('click', () => {
-    settingsDrop.classList.remove('open');
-    settingsBtn.setAttribute('aria-expanded', 'false');
-    showSetupModal(true);
-  });
-
-  signoutBtn.addEventListener('click', () => {
-    ['vd_pat', 'vd_owner', 'vd_repo'].forEach(k => localStorage.removeItem(k));
-    location.reload();
-  });
-
-  // ── Utils ──────────────────────────────────────────────────────────────────
-  function escHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
   }
+});
 
-  // ── Boot ───────────────────────────────────────────────────────────────────
-  window.addEventListener('load', () => {
-    const cfg = loadConfig();
-    if (cfg) {
-      fetchReleases();
-    } else {
-      showSetupModal(false);
-    }
-  });
+editSettingsBtn.addEventListener('click', () => {
+  settingsDrop.classList.remove('open');
+  settingsBtn.setAttribute('aria-expanded', 'false');
+  showSetupModal(true);
+});
+
+signoutBtn.addEventListener('click', () => {
+  [KEY_PAT, KEY_REPOS].forEach(k => localStorage.removeItem(k));
+  location.reload();
+});
+
+// ── Utils ─────────────────────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  loadConfig() ? fetchReleases() : showSetupModal(false);
+});
 </script>
 
-<!-- T04: SW Registration -->
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 
 </body>
