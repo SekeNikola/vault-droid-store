@@ -598,13 +598,14 @@ inputRepo.addEventListener('keydown', e => {
 // ── Modal show/hide ───────────────────────────────────────────────────────────
 function showSetupModal(prefill = false) {
   clearModalError();
+  inputPat.value = '';
   if (prefill) {
     const cfg = loadConfig();
-    inputPat.value = '';
     _modalRepos = cfg ? [...cfg.repos] : [];
+    inputPat.placeholder = 'Leave blank to keep existing token';
   } else {
-    inputPat.value = '';
     _modalRepos = [];
+    inputPat.placeholder = 'ghp_…';
   }
   renderChips();
   modalOverlay.classList.add('visible');
@@ -627,7 +628,8 @@ function clearModalError() {
 // Submit
 setupForm.addEventListener('submit', e => {
   e.preventDefault();
-  const pat = inputPat.value.trim();
+  const patInput = inputPat.value.trim();
+  const pat = patInput || localStorage.getItem(KEY_PAT) || '';
   if (!pat) { showModalError('Enter your Personal Access Token.'); return; }
   if (!_modalRepos.length) { showModalError('Add at least one repository.'); return; }
   saveConfig(pat, _modalRepos);
