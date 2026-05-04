@@ -139,10 +139,11 @@
     }
 
     .card-app-name {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 700;
       color: var(--text);
       word-break: break-word;
+      letter-spacing: -0.2px;
     }
 
     .card-version {
@@ -761,7 +762,7 @@ function renderCards(cards) {
         <div class="card-app-name">${escHtml(card.appName)}</div>
         <span class="card-version" aria-label="Version ${escHtml(card.version)}">${escHtml(card.version)}</span>
       </div>
-      <div class="card-repo">${escHtml(card.repoSlug)}</div>
+      <div class="card-repo">${escHtml(card.repoSlug.split('/')[1])}</div>
       <div class="card-date">${escHtml(dateStr)}</div>
       <div class="card-footer">${footerHtml}</div>
     `;
