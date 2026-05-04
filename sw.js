@@ -4,7 +4,7 @@
 //   - APK downloads (.apk) → network-only
 //   - Everything else → cache-first with network fallback
 
-const CACHE_NAME = 'vaultdroid-v1';
+const CACHE_NAME = 'vaultdroid-v2';
 const SHELL_FILES = ['.', 'manifest.json'];
 
 self.addEventListener('install', event => {

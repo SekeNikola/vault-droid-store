@@ -726,7 +726,7 @@ async function fetchRepoReleases(slug, pat) {
   const data = await res.json();
   return data.map(r => ({
     id:          r.id,
-    appName:     r.name || r.tag_name,
+    appName:     /^v?\d+(\.\d+)*$/.test((r.name || '').trim()) ? slug.split('/')[1] : (r.name || r.tag_name),
     version:     r.tag_name,
     publishedAt: new Date(r.published_at),
     apkAsset:    r.assets.find(a => a.name.endsWith('.apk')) ?? null,
